@@ -1,12 +1,12 @@
 <template>
-  <button class="app-btn" @click="$emit('click')">
+  <button class="base-btn" @click="$emit('click')">
     <slot />
   </button>
 </template>
 
 <script>
 export default {
-  name: "AppButton",
+  name: "BaseButton",
 
   props: {
     maxWidthInRem: {
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style scoped>
-.app-btn {
+.base-btn {
   padding: 0.5rem;
   max-width: v-bind(maxWidthValue);
   width: 100%;
@@ -40,15 +40,15 @@ export default {
   position: relative;
   transition: 0.3s;
 }
-.app-btn:hover {
+.base-btn:hover {
   box-shadow: 0.25rem 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.2);
 }
-.app-btn:disabled {
+.base-btn:disabled {
   transform: none;
   filter: grayscale(50%);
   cursor: default;
 }
-.app-btn::before {
+.base-btn::before {
   content: "";
   position: absolute;
   top: 0;
@@ -65,7 +65,7 @@ export default {
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
-.app-btn:not(:disabled):hover::before {
+.base-btn:not(:disabled):hover::before {
   opacity: 1;
 }
 </style>

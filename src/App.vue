@@ -1,7 +1,7 @@
 <template>
   <div class="global-container">
     <FileUploadSection />
-    <FileManagementTable />
+    <FileManagementTable class="global-container__files-table" />
   </div>
 </template>
 
@@ -29,12 +29,40 @@ export default {
   --color-text: #3c434b;
   --color-btn: #fdd835;
   --color-icon: #3c434b;
+  --color-icon-bg-hover: #f0f0f0;
   --color-border: #dce0e4;
-  --drag-drop-bg: #e8f5e9;
-  --drag-drop-bg-rgb: 232, 245, 233;
+
+  --color-drag-drop-bg-rgb: 232, 245, 233;
+
+  --color-table-top-section-bg: #f3f3fd;
+  --color-table-head: #dadfe3;
+
+  --color-status-submitted-bg: #e0f2fe;
+  --color-status-submitted-text: #0369a1;
+  --color-status-submitted-circle: #3b82f6;
+  --color-status-saved-bg: #f3f4f6;
+  --color-status-saved-text: #1f2937;
+  --color-status-saved-circle: #000000;
+  --color-status-awaiting-bg: #fef9c3;
+  --color-status-awaiting-text: #854d0e;
+  --color-status-awaiting-circle: #eab308;
+  --color-status-approved-bg: #dcfce7;
+  --color-status-approved-text: #166534;
+  --color-status-approved-circle: #16a34a;
+  --color-status-rejected-bg: #fee2e2;
+  --color-status-rejected-text: #991b1b;
+  --color-status-rejected-circle: #ef4444;
 }
 
 .global-container {
   padding: 1rem;
+  min-width: 1024px;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+.global-container__files-table {
+  flex-grow: 1;
 }
 </style>

@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Authority Letter (PoA_RV25.0027-005986.pdf)",
+    "comment": "Some comment here",
+    "size": "65.1 MB",
+    "added": "03.04.2025 15:30:35",
+    "by": "System",
+    "status": "Submitted",
+    "actions": ["view", "download", "edit", "delete"]
+  },
+  {
+    "name": "Authority Letter (PoA_RV25.0027-005986.pdf)",
+    "comment": "Some comment here",
+    "size": "65.1 MB",
+    "added": "03.04.2025 15:35:35",
+    "by": "System",
+    "status": "Saved locally",
+    "actions": ["view", "download", "edit", "delete"]
+  },
+  {
+    "name": "Authority Letter (PoA_RV25.0027-005986.pdf)",
+    "comment": "Some comment here",
+    "size": "65.1 MB",
+    "added": "03.04.2025 15:40:35",
+    "by": "System",
+    "status": "Awaiting Approval",
+    "actions": ["view", "download", "edit", "delete"]
+  },
+  {
+    "name": "Authority Letter (PoA_RV25.0027-005986.pdf)",
+    "comment": "Some comment here",
+    "size": "65.1 MB",
+    "added": "03.04.2025 15:45:35",
+    "by": "System",
+    "status": "Approved",
+    "actions": ["view", "download", "edit", "delete"]
+  },
+  {
+    "name": "Authority Letter (PoA_RV25.0027-005986.pdf)",
+    "comment": "Some comment here",
+    "size": "65.1 MB",
+    "added": "03.04.2025 15:50:35",
+    "by": "System",
+    "status": "Approved",
+    "actions": ["view", "download", "edit", "delete"]
+  },
+  {
+    "name": "Authority Letter (PoA_RV25.0027-005986.pdf)",
+    "comment": "Some comment here",
+    "size": "65.1 MB",
+    "added": "03.04.2025 15:55:35",
+    "by": "System",
+    "status": "Submitted",
+    "actions": ["view", "download", "edit", "delete"]
+  },
+  {
+    "name": "Authority Letter (PoA_RV25.0027-005986.pdf)",
+    "comment": "Some comment here",
+    "size": "65.1 MB",
+    "added": "03.04.2025 16:00:35",
+    "by": "System",
+    "status": "Rejected",
+    "actions": ["view", "download", "edit", "delete"]
+  }
+]

@@ -1,8 +1,8 @@
 <template>
   <div class="upload-panel">
-    <AppButton :maxWidthInRem="10" @click="handleUploadClick">
-      <IconUpload />
-    </AppButton>
+    <BaseButton :maxWidthInRem="12" @click="onUploadClick">
+      <IconLoad :sizeInRem="4" tip="Upload" />
+    </BaseButton>
     <label
       for="file-upload"
       class="drag-drop-field"
@@ -46,15 +46,13 @@
 </template>
 
 <script>
-import IconUpload from "@/components/icons/IconUpload.vue";
-import AppButton from "@/components/AppButton.vue";
+import IconLoad from "@/components/icons/IconLoad.vue";
 
 export default {
   name: "FileUploadSection",
 
   components: {
-    IconUpload,
-    AppButton,
+    IconLoad,
   },
 
   data() {
@@ -66,7 +64,7 @@ export default {
   },
 
   methods: {
-    handleUploadClick() {
+    onUploadClick() {
       this.$refs.fileUploadElement?.click();
     },
 
@@ -119,7 +117,7 @@ export default {
 
 <style scoped>
 .green-filter-bg {
-  background-color: rgba(var(--drag-drop-bg-rgb), 0.5);
+  background-color: rgba(var(--color-drag-drop-bg-rgb), 0.5);
 }
 
 .upload-panel {
@@ -138,7 +136,7 @@ export default {
 .drag-drop-field__default-label {
   position: relative;
   z-index: -1;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
