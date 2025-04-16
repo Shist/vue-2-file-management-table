@@ -57,7 +57,6 @@ export default {
 
   data() {
     return {
-      fileUploadElement: null,
       jsonFile: null,
       isJsonFileUploaded: false,
     };

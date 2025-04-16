@@ -9,6 +9,15 @@
     <table class="files-table">
       <thead class="files-table__head">
         <tr class="files-table__head-row">
+          <th class="files-table__head-item">
+            <input
+              ref="selectAllCheckbox"
+              type="checkbox"
+              :checked="areAllRowsSelected"
+              class="files-table__checkbox"
+              @change="toggleSelectAll"
+            />
+          </th>
           <th
             v-for="header in tableHeaders"
             :key="header"
@@ -19,13 +28,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="row in tableDataRows" :key="row.added">
+        <tr v-for="rowObj in tableDataRows" :key="rowObj.added">
           <td
-            v-for="(itemValue, itemKey) in row"
+            v-for="(itemValue, itemKey) in rowObj"
             :key="itemKey"
             class="files-table__body-item"
           >
-            <template v-if="itemKey === 'name'">
+            <template v-if="itemKey === 'isChecked'">
+              <input
+                type="checkbox"
+                class="files-table__checkbox"
+                v-model="rowObj.isChecked"
+              />
+            </template>
+            <template v-else-if="itemKey === 'name'">
               <span class="bold-data-text">
                 {{ getBoldNamePart(itemValue) }}
               </span>
@@ -93,6 +109,29 @@ export default {
     };
   },
 
+  computed: {
+    selectedRows() {
+      return this.tableDataRows.filter((row) => row.isChecked);
+    },
+
+    selectAllCheckboxState() {
+      const rowsAmount = this.tableDataRows.length;
+      const selectedRowsAmount = this.selectedRows.length;
+
+      if (rowsAmount === 0 || selectedRowsAmount === 0) {
+        return "unchecked";
+      } else if (selectedRowsAmount === rowsAmount) {
+        return "checked";
+      } else {
+        return "indeterminate";
+      }
+    },
+
+    areAllRowsSelected() {
+      return this.selectAllCheckboxState === "checked";
+    },
+  },
+
   methods: {
     onAddBtnClick() {
       console.log("Add button was clicked!");
@@ -149,6 +188,25 @@ export default {
         console.error(`Unknown action name: ${actionName}`);
       }
     },
+
+    toggleSelectAll() {
+      const newCheckValue = this.selectAllCheckboxState !== "checked";
+
+      this.tableDataRows.forEach((row) => {
+        row.isChecked = newCheckValue;
+      });
+    },
+  },
+
+  watch: {
+    selectAllCheckboxState(newCheckboxState) {
+      if (!this.$refs.selectAllCheckbox) {
+        return;
+      }
+
+      const isIndeterminate = newCheckboxState === "indeterminate";
+      this.$refs.selectAllCheckbox.indeterminate = isIndeterminate;
+    },
   },
 
   mounted() {
@@ -169,7 +227,7 @@ export default {
         rowObj.status = "Unknown status";
       }
 
-      return { ...rowObj, actions: validActions };
+      return { isChecked: false, ...rowObj, actions: validActions };
     });
   },
 };
@@ -217,6 +275,7 @@ export default {
   font-size: 1rem;
   font-weight: 500;
   text-align: left;
+  vertical-align: middle;
   color: var(--color-text);
   text-transform: capitalize;
   background-color: var(--color-table-head);
@@ -251,6 +310,15 @@ export default {
 }
 .files-table__action-btn:hover {
   background-color: var(--color-icon-bg-hover);
+}
+.files-table__checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.files-table__checkbox:indeterminate {
+  background-color: red;
 }
 
 .bold-data-text {
