@@ -1,28 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="global-container">
+    <FileUploadSection />
+    <FileManagementTable />
   </div>
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld.vue";
+import FileUploadSection from "@/components/FileUploadSection.vue";
+import FileManagementTable from "@/components/FileManagementTable.vue";
 
 export default {
   name: "App",
+
   components: {
-    HelloWorld,
+    FileUploadSection,
+    FileManagementTable,
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import "@/assets/styles/reset.css";
+
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  --color-text: #3c434b;
+  --color-btn: #fdd835;
+  --color-icon: #3c434b;
+  --color-border: #dce0e4;
+  --drag-drop-bg: #e8f5e9;
+  --drag-drop-bg-rgb: 232, 245, 233;
+}
+
+.global-container {
+  padding: 1rem;
 }
 </style>
