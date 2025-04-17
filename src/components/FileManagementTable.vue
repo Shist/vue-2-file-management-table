@@ -58,7 +58,7 @@
                   v-for="action in itemValue"
                   :key="action"
                   class="files-table__action-btn"
-                  @click="onActionBtnClick(action)"
+                  @click="onActionBtnClick(action, rowObj.name)"
                 >
                   <component
                     :is="getActionComponent(action)"
@@ -261,11 +261,13 @@ export default {
       }
     },
 
-    onActionBtnClick(actionName) {
+    onActionBtnClick(actionName, rowObjName) {
       const actionTitle = ACTIONS[actionName]?.title;
 
       if (actionTitle) {
-        console.log(`${actionTitle} action button was clicked!`);
+        console.log(
+          `${actionTitle} action button was clicked for ${rowObjName}`
+        );
       } else {
         console.error(`Unknown action name: ${actionName}`);
       }
