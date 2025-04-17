@@ -61,5 +61,50 @@
     "by": "System",
     "status": "Rejected",
     "actions": ["view", "download", "edit", "delete"]
+  },
+  {
+    "name": "Authority Letter (PoA_RV25.0027-005986.pdf)",
+    "comment": "Some comment here",
+    "size": "65.1 MB",
+    "added": "03.04.2025 16:05:35",
+    "by": "System",
+    "status": "Rejected",
+    "actions": ["view", "download", "edit", "delete"]
+  },
+  {
+    "name": "Authority Letter (PoA_RV25.0027-005986.pdf)",
+    "comment": "Some comment here",
+    "size": "65.1 MB",
+    "added": "03.04.2025 16:10:35",
+    "by": "System",
+    "status": "Rejected",
+    "actions": ["view", "download", "edit", "delete"]
+  },
+  {
+    "name": "Authority Letter (PoA_RV25.0027-005986.pdf)",
+    "comment": "Some comment here",
+    "size": "65.1 MB",
+    "added": "03.04.2025 16:15:35",
+    "by": "System",
+    "status": "Rejected",
+    "actions": ["view", "download", "edit", "delete"]
+  },
+  {
+    "name": "Authority Letter (PoA_RV25.0027-005986.pdf)",
+    "comment": "Some comment here",
+    "size": "65.1 MB",
+    "added": "03.04.2025 16:20:35",
+    "by": "System",
+    "status": "Rejected",
+    "actions": ["view", "download", "edit", "delete"]
+  },
+  {
+    "name": "Authority Letter (PoA_RV25.0027-005986.pdf)",
+    "comment": "Some comment here",
+    "size": "65.1 MB",
+    "added": "03.04.2025 16:25:35",
+    "by": "System",
+    "status": "Rejected",
+    "actions": ["view", "download", "edit", "delete"]
   }
 ]

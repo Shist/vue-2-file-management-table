@@ -28,6 +28,7 @@ export default {
 
   --color-text: #3c434b;
   --color-btn: #fdd835;
+  --color-btn-disabled: #d9d9d9;
   --color-icon: #3c434b;
   --color-icon-bg-hover: #f0f0f0;
   --color-border: #dce0e4;

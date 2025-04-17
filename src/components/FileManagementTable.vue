@@ -28,7 +28,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="rowObj in tableDataRows" :key="rowObj.added">
+        <tr v-for="rowObj in visibleDataRows" :key="rowObj.added">
           <td
             v-for="(itemValue, itemKey) in rowObj"
             :key="itemKey"
@@ -73,11 +73,31 @@
       </tbody>
     </table>
     <section class="table-wrapper__bottom-section">
-      <span>Rows per page</span>
-      <input type="number" style="width: 3rem" />
-      <span>1 to 7 of 12</span>
-      <button>&lt;</button>
-      <button>&gt;</button>
+      <span class="table-wrapper__bottom-section-label">Rows per page</span>
+      <input
+        type="number"
+        v-model.number="rowsPerPageModel"
+        :min="minRowsPerPage"
+        :max="maxRowsPerPage"
+        class="table-wrapper__bottom-section-input"
+      />
+      <span class="table-wrapper__bottom-section-label">
+        {{ paginationLabel }}
+      </span>
+      <button
+        class="table-wrapper__bottom-section-btn"
+        :disabled="isPrevPageBtnDisabled"
+        @click="onPrevPageClick"
+      >
+        <IconLeftArrow />
+      </button>
+      <button
+        class="table-wrapper__bottom-section-btn"
+        :disabled="isNextPageBtnDisabled"
+        @click="onNextPageClick"
+      >
+        <IconRightArrow />
+      </button>
     </section>
   </div>
 </template>
@@ -88,6 +108,8 @@ import IconView from "@/components/icons/IconView.vue";
 import IconEdit from "@/components/icons/IconEdit.vue";
 import IconLoad from "@/components/icons/IconLoad.vue";
 import IconDelete from "@/components/icons/IconDelete.vue";
+import IconLeftArrow from "@/components/icons/IconLeftArrow.vue";
+import IconRightArrow from "@/components/icons/IconRightArrow.vue";
 import tableData from "@/data/table-data.json";
 import { STATUS_CLASSES, ACTIONS } from "@/constants";
 
@@ -100,22 +122,32 @@ export default {
     IconEdit,
     IconLoad,
     IconDelete,
+    IconLeftArrow,
+    IconRightArrow,
   },
 
   data() {
     return {
       tableHeaders: [],
       tableDataRows: [],
+      minRowsPerPage: 1,
+      maxRowsPerPage: 100,
+      rowsPerPage: 10,
+      currPage: 1,
     };
   },
 
   computed: {
+    visibleDataRows() {
+      return this.tableDataRows.slice(this.firstPageRow - 1, this.lastPageRow);
+    },
+
     selectedRows() {
-      return this.tableDataRows.filter((row) => row.isChecked);
+      return this.visibleDataRows.filter((row) => row.isChecked);
     },
 
     selectAllCheckboxState() {
-      const rowsAmount = this.tableDataRows.length;
+      const rowsAmount = this.visibleDataRows.length;
       const selectedRowsAmount = this.selectedRows.length;
 
       if (rowsAmount === 0 || selectedRowsAmount === 0) {
@@ -129,6 +161,56 @@ export default {
 
     areAllRowsSelected() {
       return this.selectAllCheckboxState === "checked";
+    },
+
+    rowsPerPageModel: {
+      get() {
+        return this.rowsPerPage;
+      },
+      set(newValue) {
+        let parsedValue = Number(newValue);
+
+        if (isNaN(parsedValue)) {
+          parsedValue = 1;
+        }
+
+        if (parsedValue < this.minRowsPerPage) {
+          this.rowsPerPage = this.minRowsPerPage;
+        } else if (parsedValue > this.maxRowsPerPage) {
+          this.rowsPerPage = this.maxRowsPerPage;
+        } else {
+          this.rowsPerPage = parsedValue;
+        }
+
+        this.currPage = 1;
+        this.resetAllCheckboxes();
+      },
+    },
+
+    firstPageRow() {
+      return (this.currPage - 1) * this.rowsPerPage + 1;
+    },
+
+    lastPageRow() {
+      return Math.min(
+        this.firstPageRow + this.rowsPerPage - 1,
+        this.tableDataRows.length
+      );
+    },
+
+    paginationLabel() {
+      return `${this.firstPageRow} to ${this.lastPageRow} of ${this.tableDataRows.length}`;
+    },
+
+    isPrevPageBtnDisabled() {
+      return this.currPage === 1;
+    },
+
+    isNextPageBtnDisabled() {
+      return (
+        this.currPage ===
+        Math.ceil(this.tableDataRows.length / this.rowsPerPage)
+      );
     },
   },
 
@@ -192,9 +274,25 @@ export default {
     toggleSelectAll() {
       const newCheckValue = this.selectAllCheckboxState !== "checked";
 
-      this.tableDataRows.forEach((row) => {
+      this.visibleDataRows.forEach((row) => {
         row.isChecked = newCheckValue;
       });
+    },
+
+    resetAllCheckboxes() {
+      this.tableDataRows.forEach((row) => {
+        row.isChecked = false;
+      });
+    },
+
+    onPrevPageClick() {
+      this.currPage--;
+      this.resetAllCheckboxes();
+    },
+
+    onNextPageClick() {
+      this.currPage++;
+      this.resetAllCheckboxes();
     },
   },
 
@@ -258,7 +356,41 @@ export default {
 .table-wrapper__bottom-section {
   margin-top: auto;
   padding: 0.75rem;
-  align-self: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.table-wrapper__bottom-section-label {
+  color: var(--color-text);
+}
+.table-wrapper__bottom-section-input {
+  width: 3.25rem;
+  padding: 0.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  text-align: center;
+  font-size: 1rem;
+  appearance: none;
+}
+.table-wrapper__bottom-section-btn {
+  padding: 0.25rem;
+  display: flex;
+  font-size: 1rem;
+  background-color: transparent;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.table-wrapper__bottom-section-btn:hover {
+  background-color: var(--color-icon-bg-hover);
+}
+.table-wrapper__bottom-section-btn:disabled {
+  background-color: var(--color-btn-disabled);
+  cursor: not-allowed;
 }
 
 .files-table {
